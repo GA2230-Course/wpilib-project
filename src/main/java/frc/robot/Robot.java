@@ -46,7 +46,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       CommandScheduler.getInstance().schedule(m_autonomousCommand);
     }
-    intake.open();
     CommandScheduler.getInstance().schedule(timeoutIntake);
   }
 

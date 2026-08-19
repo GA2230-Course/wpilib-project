@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Timer;
 
 public class MoveElevatorWithTimeout extends Command {
-    private Elevator elevator;
-    private double timeout;
-    private double speed;
-    private Timer timer;
+    private final Elevator elevator;
+    private final double timeout;
+    private final double speed;
+    private final Timer timer;
 
     public MoveElevatorWithTimeout(Elevator elevator, double speed, double timeout) {
         this.elevator = elevator;
@@ -18,6 +18,7 @@ public class MoveElevatorWithTimeout extends Command {
         this.timeout = timeout;
         this.timer = new Timer();
         addRequirements(elevator);
+        System.out.println("MoveElevatorWithTimeout command created with timeout: " + timeout + " seconds");
     }
 
     public void initialize() {
@@ -26,5 +27,15 @@ public class MoveElevatorWithTimeout extends Command {
 
     public void execute() {
         elevator.setHeight(elevator.getHeight() + speed);
+    }
+
+    public boolean isFinished() {
+        return timer.get() >= timeout;
+    }
+
+    public void end(boolean interrupted) {
+        timer.stop();
+        System.out.println("MoveElevatorWithTimeout command finished after " + timer.get() + " seconds");
+        timer.reset();
     }
 }

@@ -3,22 +3,22 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class intake extends SubsystemBase {
-    private int isOpen;
+    private boolean isOpen;
 
     public intake(){
-        isOpen = 0;
+        isOpen = false;
     }
 
     @Override
     public void periodic() {
-        System.out.println("Intake is " + (isOpen == 1 ? "open" : "closed"));
+        System.out.println("Intake is " + (isOpen ? "open" : "closed"));
     }
 
     public void open() {
-        isOpen = 1;
+        isOpen = true;
     }
 
     public void close() {
-        isOpen = 0;
+        isOpen = false;
     }
 }

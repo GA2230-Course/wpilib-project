@@ -7,17 +7,17 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.intake;
+import frc.robot.subsystems.Intake;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final RobotContainer m_robotContainer;
-  private intake robotIntake;
+  private Intake intake;
 
   public Robot() {
     m_robotContainer = new RobotContainer();
-    robotIntake = new intake();
+    intake = new Intake();
   }
 
   @Override
@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    robotIntake.close();
+    intake.close();
   }
 
   @Override
@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       CommandScheduler.getInstance().schedule(m_autonomousCommand);
     }
-    robotIntake.open();
+    intake.open();
   }
 
   @Override
@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousExit() {
-    robotIntake.close();
+    intake.close();
   }
 
   @Override
@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    robotIntake.open();
+    intake.open();
   }
 
   @Override
@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopExit() {
-    robotIntake.close();
+    intake.close();
   }
 
   @Override

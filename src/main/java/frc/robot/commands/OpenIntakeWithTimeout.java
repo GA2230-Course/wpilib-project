@@ -16,6 +16,7 @@ public class OpenIntakeWithTimeout extends Command {
         this.timeout = timeout;
         this.timer = new Timer();
         addRequirements(intake);
+        System.out.println("OpenIntakeWithTimeout command created with timeout: " + timeout + " seconds");
     }
 
     public void initialize() {
@@ -34,5 +35,6 @@ public class OpenIntakeWithTimeout extends Command {
         intake.close();
         timer.stop();
         timer.reset();
+        System.out.println("OpenIntakeWithTimeout command finished after " + timer.get() + " seconds");
     }
 }

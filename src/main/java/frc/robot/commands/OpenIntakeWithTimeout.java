@@ -7,14 +7,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Timer;
 
 public class OpenIntakeWithTimeout extends Command {
-    private Intake intake;
-    private double timeout;
-    private Timer timer;
+    private final Intake intake;
+    private final double timeout;
+    private final Timer timer = new Timer();
 
     public OpenIntakeWithTimeout(Intake intake, double timeout) {
         this.intake = intake;
         this.timeout = timeout;
-        this.timer = new Timer();
         addRequirements(intake);
         System.out.println("OpenIntakeWithTimeout command created with timeout: " + timeout + " seconds");
     }

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class OpenIntakeWithTimeout extends Command {
     private final Intake intake;
-    private double timeout;
+    private final double timeout;
     private final Timer timer = new Timer();
 
     public OpenIntakeWithTimeout(Intake intake, double timeout) {

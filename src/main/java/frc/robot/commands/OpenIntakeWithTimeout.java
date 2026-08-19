@@ -34,7 +34,7 @@ public class OpenIntakeWithTimeout extends Command {
     public void end(boolean interrupted) {
         intake.close();
         timer.stop();
-        timer.reset();
         System.out.println("OpenIntakeWithTimeout command finished after " + timer.get() + " seconds");
+        timer.reset();
     }
 }

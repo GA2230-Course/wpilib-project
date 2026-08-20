@@ -6,42 +6,42 @@ import frc.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-import edu.wpi.first.wpilibj.Timer;
-
-public class TakeAndElevate extends Command {
+public class TakeAndElevate extends Command { // Command to take objects with the intake for a certain time and then elevate it to a certain height
     private final Intake intake;
     private final Elevator elevator;
-    private final double intakeTimeout;
+    private final OpenIntakeWithTimeout intakeCommand;
     private final double elevatorHeight;
-    private final Timer timer = new Timer();
+    private boolean elevatorFinished;
 
     public TakeAndElevate(Intake intake, Elevator elevator, double intakeTimeout, double elevatorHeight) {
         this.intake = intake;
         this.elevator = elevator;
-        this.intakeTimeout = intakeTimeout;
+        this.intakeCommand = new OpenIntakeWithTimeout(intake, intakeTimeout);
         this.elevatorHeight = elevatorHeight;
+        this.elevatorFinished = false;
         addRequirements(intake, elevator);
-        System.out.println("TakeAndElevate command created with intake timeout: " + intakeTimeout + " seconds");
     }
 
     public void initialize() {
-        intake.open();
-        timer.start();
+        elevatorFinished = false;
+        elevator.setHeight(0);
+        intakeCommand.initialize();
     }
 
     public void execute() {
+        if (!intakeCommand.isFinished()) {
+            intakeCommand.execute();
+        } else if (!elevatorFinished) {
+            intakeCommand.end(false);
+            elevator.setHeight(elevatorHeight);
+            elevatorFinished = true;
+        }
     }
 
     public boolean isFinished() {
-        return timer.get() >= intakeTimeout;
+        return intakeCommand.isFinished() && elevatorFinished;
     }
 
     public void end(boolean interrupted) {
-        elevator.setHeight(elevatorHeight);
-        intake.close();
-        timer.stop();
-        System.out.println("TakeAndElevate command finished after " + timer.get() + " seconds");
-        timer.reset();
     }
-    
 }

@@ -22,6 +22,7 @@ public class MoveElevatorWithTimeout extends Command {
     }
 
     public void initialize() {
+        timer.reset();
         timer.start();
     }
 

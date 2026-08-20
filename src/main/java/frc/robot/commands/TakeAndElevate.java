@@ -6,7 +6,8 @@ import frc.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class TakeAndElevate extends Command { // Command to take objects with the intake for a certain time and then elevate it to a certain height
+public class TakeAndElevate extends Command { // Command to take objects with the intake for a certain time and then
+                                              // elevate it to a certain height
     private final Elevator elevator;
     private final OpenIntakeWithTimeout intakeCommand;
     private final double elevatorHeight;

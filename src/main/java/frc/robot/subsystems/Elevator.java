@@ -14,7 +14,7 @@ public class Elevator extends SubsystemBase {
     }
 
     public void setHeight(double newHeight) {
-        if(newHeight < 0) {
+        if (newHeight < 0) {
             throw new IllegalArgumentException("Height cannot be negative");
         }
         height = newHeight;

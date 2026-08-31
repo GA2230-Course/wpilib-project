@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Timer;
 
+import static frc.robot.subsystems.SuperstructureConstants.*;
+
 public class SuperstructureSubsystem extends StateMachineSubsystem<SuperstructureSubsystem.SuperState> {
 
     public enum SuperState {
@@ -15,12 +17,6 @@ public class SuperstructureSubsystem extends StateMachineSubsystem<Superstructur
     private Intake intake;
     private Elevator elevator;
     private final Timer timer = new Timer();
-
-    private static final double INTAKE_TIMEOUT = 2.0;
-    private static final double ELEVATOR_MOVE_TIMEOUT = 1.5;
-    private static final double ELEVATOR_SPEED_STEP = 5.0;
-    private static final double ELEVATOR_START_HEIGHT = 0.0;
-    private static final double TARGET_ELEVATOR_HEIGHT = 500.0;
 
     public SuperstructureSubsystem(Intake intake, Elevator elevator) {
         super(SuperState.IDLE);
@@ -43,7 +39,7 @@ public class SuperstructureSubsystem extends StateMachineSubsystem<Superstructur
 
         switch (wanted) {
             case OPEN_INTAKE_TIMED:
-                if (timer.hasElapsed(INTAKE_TIMEOUT)) {
+                if (timer.hasElapsed(INTAKE_TIMEOUT_SEC)) {
                     timer.stop();
                     setWantedState(SuperState.IDLE);
                     return SuperState.IDLE;
@@ -51,7 +47,7 @@ public class SuperstructureSubsystem extends StateMachineSubsystem<Superstructur
                 return SuperState.OPEN_INTAKE_TIMED;
 
             case MOVE_ELEVATOR_TIMED:
-                if (timer.hasElapsed(ELEVATOR_MOVE_TIMEOUT)) {
+                if (timer.hasElapsed(ELEVATOR_MOVE_TIMEOUT_SEC)) {
                     timer.stop();
                     setWantedState(SuperState.IDLE);
                     return SuperState.IDLE;
@@ -59,7 +55,7 @@ public class SuperstructureSubsystem extends StateMachineSubsystem<Superstructur
                 return SuperState.MOVE_ELEVATOR_TIMED;
 
             case TAKE_AND_ELEVATE_INTAKE_STAGE:
-                if (timer.hasElapsed(INTAKE_TIMEOUT)) {
+                if (timer.hasElapsed(INTAKE_TIMEOUT_SEC)) {
                     timer.stop();
                     setWantedState(SuperState.TAKE_AND_ELEVATE_LIFT_STAGE);
                     return SuperState.TAKE_AND_ELEVATE_LIFT_STAGE;
@@ -77,23 +73,23 @@ public class SuperstructureSubsystem extends StateMachineSubsystem<Superstructur
     protected void applyCurrentState() {
         switch (getCurrentState()) {
             case OPEN_INTAKE_TIMED:
-                elevator.setHeight(ELEVATOR_START_HEIGHT);
+                elevator.setHeight(ELEVATOR_START_HEIGHT_MM);
                 intake.open();
                 break;
 
             case MOVE_ELEVATOR_TIMED:
                 intake.close();
-                elevator.setHeight(elevator.getHeight() + ELEVATOR_SPEED_STEP);
+                elevator.setHeight(elevator.getHeight() + ELEVATOR_SPEED_STEP_UNITS);
                 break;
 
             case TAKE_AND_ELEVATE_INTAKE_STAGE:
-                elevator.setHeight(0);
+                elevator.setHeight(ELEVATOR_START_HEIGHT_MM);
                 intake.open();
                 break;
 
             case TAKE_AND_ELEVATE_LIFT_STAGE:
                 intake.close();
-                elevator.setHeight(TARGET_ELEVATOR_HEIGHT);
+                elevator.setHeight(TARGET_ELEVATOR_HEIGHT_MM);
                 break;
 
             case IDLE:

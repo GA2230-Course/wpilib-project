@@ -4,17 +4,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
 
-    public enum SystemState {
+    public enum IntakeState {
         OPEN,
         CLOSED
     }
 
-    private SystemState currentState;
-    private SystemState wantedState;
+    private IntakeState currentState;
+    private IntakeState wantedState;
 
     public Intake() {
-        currentState = SystemState.CLOSED;
-        wantedState = SystemState.CLOSED;
+        currentState = IntakeState.CLOSED;
+        wantedState = IntakeState  .CLOSED;
     }
 
     @Override
@@ -32,22 +32,22 @@ public class Intake extends SubsystemBase {
         }
     }
 
-    private SystemState handleStateTransition() {
+    private IntakeState handleStateTransition() {
         if (currentState != wantedState) {
             return wantedState;
         }
         return currentState;
     }
 
-    public void setSystemState(SystemState state) {
+    public void setIntakeState(IntakeState state) {
         wantedState = state;
     }
 
     public void open() {
-        wantedState = SystemState.OPEN;
+        wantedState = IntakeState.OPEN;
     }
 
     public void close() {
-        wantedState = SystemState.CLOSED;
+        wantedState = IntakeState.CLOSED;
     }
 }

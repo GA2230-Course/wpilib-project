@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.Superstructure;
 
 public class SuperstructureConstants {
     public static final double INTAKE_TIMEOUT_SEC = 2.0;

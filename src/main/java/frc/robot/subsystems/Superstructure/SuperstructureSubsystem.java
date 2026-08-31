@@ -1,8 +1,11 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.Superstructure;
+
+import static frc.robot.subsystems.Superstructure.SuperstructureConstants.*;
 
 import edu.wpi.first.wpilibj.Timer;
-
-import static frc.robot.subsystems.SuperstructureConstants.*;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.StateMachineSubsystem;
+import frc.robot.subsystems.Intake.Intake;
 
 public class SuperstructureSubsystem extends StateMachineSubsystem<SuperstructureSubsystem.SuperState> {
 

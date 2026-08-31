@@ -1,9 +1,7 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.Intake;
-
 import frc.robot.subsystems.Elevator;
-
+import frc.robot.subsystems.Intake.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class TakeAndElevate extends Command { // Command to take objects with the intake for a certain time and then

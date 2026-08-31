@@ -1,9 +1,7 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.Intake;
-
 import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.robot.subsystems.Intake.Intake;
 import edu.wpi.first.wpilibj.Timer;
 
 public class OpenIntakeWithTimeout extends Command {

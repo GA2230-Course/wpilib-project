@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Intake;
-
+import frc.robot.subsystems.Intake.Intake;
 import frc.robot.commands.OpenIntakeWithTimeout;
 import frc.robot.commands.MoveElevatorWithTimeout;
 import frc.robot.commands.TakeAndElevate; 
